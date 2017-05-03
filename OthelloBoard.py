@@ -15,15 +15,66 @@ class OthelloBoard(Board):
         self.p2_symbol = p2
 
 
-    #this function is substitute for clone. call as New = Old.cloneOBoard()
+#PYTHON: this function is substitute for clone. call as New = Old.cloneOBoard()
     def cloneOBoard(self):
         tmp = OthelloBoard(self.cols, self.rows, self.p1_symbol, self.p2_symbol)
         tmp.grid = copy.deepcopy(self.grid)
         return tmp;
 
     def initialize(self):
-        Board.set_cell(self.cols /2 -1, self.rows /2 -1, p1_symbol)
-        Board.set_cell(self.cols /2, self.rows /2, p1_symbol)
-        Board.set_cell(self.cols /2 -1, self.rows /2 , p2_symbol)
-        Board.set_cell(self.cols /2, self.rows /2 -1, p2_symbol)
+        self.set_cell(self.cols //2 -1, self.rows //2 -1,   self.p1_symbol)
+        self.set_cell(self.cols //2,    self.rows //2,      self.p1_symbol)
+        self.set_cell(self.cols //2 -1, self.rows //2,      self.p2_symbol)
+        self.set_cell(self.cols //2,    self.rows //2 -1,   self.p2_symbol)
+
+#PYTHON: Instead of having side effects this function now returns a TUPLE
+    def set_coords_in_direction(self, col, row, D):#D=direction
+        if(D.name == 'N'):
+            row += 1
+        elif(D.name == 'NE'):
+            col+=1
+            row+=1
+        elif(D.name == 'E'):
+            col+=1
+        elif(D.name == 'SE'):
+            col+=1
+            row-=1
+        elif(D.name == 'S'):
+            row-=1
+        elif(D.name == 'SW'):
+            col-=1
+            row-=1
+        elif(D.name == 'W'):
+            col-=1
+        elif(D.name == 'NW'):
+            col-=1
+            row+=1
+        else:
+            print("Invalid Direction.")
+        return (col, row)
+
+#Recursively travel in a direction
+    def check_endpoint(self, col, row, symbol, d, match_symbol):#match is bool type
+        if not self.is_in_bounds(col, row) or is_cell_empty(col,row):
+            return False
+        else:
+            if(match_symbol):
+                if(self.get_cell(col, row) == symbol):
+                    return True
+                else:
+                    (next_col, next_row) = self.set_coords_in_direction(col, row, d)
+                    return self.check_endpoint(next_col, next_row, symbol, d, match_symbol)
+            else:
+                if(self.get_cell(col, row) == symbol):
+                    return False
+                else:
+                    (next_col, next_row) = self.set_coords_in_direction(col, row, d)
+                    return self.check_endpoint(next_col, next_row, symbol, d, not match_symbol)
+
+
+
+
+
+
+
 

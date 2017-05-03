@@ -7,20 +7,24 @@
 
 import copy
 
-'''The following has been excluded as no application is apparent
+#The following has been excluded as no application is apparent
 
 from enum import Enum
 #"Directsion enum for the Othello Board"
+# a = Direction.S; 
+# a.name == 'NE' 
+#>true
+
 class Direction(Enum):
     N   = 1
     NE  = 2
     E   = 3
     SE  = 4
     S   = 5
-    W   = 6
+    SW   = 6
     W   = 7
     NW  = 8
-'''
+
 #global empty state
 EMPTY = '.'
 
@@ -33,17 +37,15 @@ class Board:
         self.grid = [[EMPTY for x in range(cols)] for y in range(rows)]
 
 
-    #Python style of overloading constructor
-    #Duplicate a board with B2 = B1.cloneBoard()
+    #PYTHON    #Duplicate a board with B2 = B1.cloneBoard()
+    #THIS SERVES AS BOTH COPY CONSTRUCTOR AND ASSIGNMENT
     def cloneBoard(self):
         tmp = Board(self.cols, self.rows)
         tmp.grid = copy.deepcopy(self.grid)
         return tmp
     #deepcopy is slow, consider replacing with list slice if performance demands
 
-    #This function is a replacement for the operator overload of "=" 
-    def mirrorBoard(self, other):
-        return False;
+
 
     #empties grid. No other references will remain.
     def delete_grid(self):

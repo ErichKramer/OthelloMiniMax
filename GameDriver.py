@@ -22,11 +22,13 @@ class GameDriver:
         else:
             print("Invalid player 2 type!")
             exit(-1)
-        print("Recieved : ", p1type, " ", p2type);
+        print("Players! : ", p1type, " ", p2type);
 
         self.board = OthelloBoard.OthelloBoard(num_rows, num_cols, 'X', 'O')
 
     def run(self):
+        self.board.initialize();
+        self.board.display();
         print("This is where the game code would go, IF I HAD ANY")
 
 

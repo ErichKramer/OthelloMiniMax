@@ -1,0 +1,6 @@
+
+Change inits so that they work more similarly to overloading.
+
+Do this by observing the number of arguments and having to veins of execution
+
+
