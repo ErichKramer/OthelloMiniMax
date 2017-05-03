@@ -21,12 +21,11 @@ class Player:
 class HumanPlayer(Player):
     def __init__(self, symbol):
         Player.__init__(self, symbol);
-        return False
 
     def clone():
         return HumanPlayer(self.symbol)
         
-
+#PYTHON: return tuple instead of change reference
     def get_move():
         col = input("Enter col:")
         row = input("Enter row:")
@@ -35,7 +34,7 @@ class HumanPlayer(Player):
 
 class MinimaxPlayer(Player):
 
-    def __init__(self):
+    def __init__(self, symbol):
         Player.__init__(self, symbol);
 
 
