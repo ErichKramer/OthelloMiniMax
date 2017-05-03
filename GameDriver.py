@@ -1,3 +1,10 @@
+'''
+    Erich Kramer - April 2017
+    Apache License
+    If using this code please cite creator.
+
+'''
+from Players import *
 import sys
 import OthelloBoard
 
@@ -5,26 +12,24 @@ import OthelloBoard
 class GameDriver:
     def __init__(self, p1type, p2type, num_rows, num_cols):
         if p1type in "human":
-            4+4
-            #make it a human player object
+            print("P1 is human")
+            self.p1 = HumanPlayer('X')
         elif p1type in "minimax" or p1type in "ai":
-            4+4
-            #make it a minimax player
+            self.p1 = MinimaxPlayer('X')
         else:
             print("Invalid player 1 type!")
             exit(-1)
 
         if p2type in "human":
-            4+4
-            #make it a human player object
+            self.p2 = HumanPlayer('O')
         elif p2type in "minimax" or p1type in "ai":
-            4+4#make it a minimax player
+            print("P2 is minimax")
+            self.p2 = MinimaxPlayer('O')
         else:
             print("Invalid player 2 type!")
             exit(-1)
-        print("Players! : ", p1type, " ", p2type);
 
-        self.board = OthelloBoard.OthelloBoard(num_rows, num_cols, 'X', 'O')
+        self.board = OthelloBoard.OthelloBoard(num_rows, num_cols, p1.symbol, p2.symbol)
 
     def run(self):
         self.board.initialize();

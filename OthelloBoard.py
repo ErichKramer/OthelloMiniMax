@@ -71,9 +71,56 @@ class OthelloBoard(Board):
                     (next_col, next_row) = self.set_coords_in_direction(col, row, d)
                     return self.check_endpoint(next_col, next_row, symbol, d, not match_symbol)
 
+    def is_legal_move(self, col, row, symbol):
+        result = False
+        if(not self.is_in_bounds(col, row) or not self.is_cell_empty(col, row)):
+            return False
+        for d in Direction: #enum from board.py
+            (next_col, next_row) = self.set_coords_in_direction(col, row, d)
+            if(self.check_endpoint(next_col, next_row, symbol, d, false)):
+                return True
+        return False
+        
+    def flip_pieces_helper(col, row, symbol, d):
+        if(self.get_cell(col, row) == symbol):
+            return 0;
+        else:
+            self.set_cell(col,row, symbol)
+            (next_col, next_row) = self.set_coords_in_direction(col, row, d)
+            return 1+ self.flip_pieces_helper(next_col, next_row, symbol, d)
 
 
 
+    def flip_pieces(col, row, symbol):
+        pieces_flipped = 0
+        if(not self.is_in_bounds(col, row)):
+            print("Flip Pieces bad params.")
+            exit();
+        for d in Direction:
+            (next_col, next_row) = self.set_coords_in_direction(col,row,d)
+            if(self.check_endpoint(next_col, next_row, symbol, d, false)):
+                pieces_flipped += self.flip_pieces_helper(next_col, next_row, symbol, d);
+
+        return pieces_flipped
+
+    def has_legal_moves_remaining(symbol):
+        for c in range (0, self.cols):
+            for r in range (0, self.rows):
+                if self.is_cell_empty(c, r) and self.is_legal_move(c, r, symbol):
+                    return True
+        return False;
+
+    def count_score(symbol):
+        score = 0
+        for c in range (0, self.cols):
+            for r in range (0, self.rows):
+                if self.grid[c][r] == symbol:
+                    score+=1
+        return score
+
+    def play_move(col, row, symbol):
+        self.set_cell(col, row, symbol)
+        self.flip_pieces(col, row, symbol)
 
 
 
