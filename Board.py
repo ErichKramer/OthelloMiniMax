@@ -10,6 +10,7 @@ import copy
 #The following has been excluded as no application is apparent
 
 from enum import Enum
+import pdb
 #"Directions enum for the Othello Board"
 
 class Direction(Enum):
@@ -72,12 +73,13 @@ class Board:
 
 
     def is_cell_empty(self, col, row):
+        #if self.is_in_bounds(col, row):#included as a hack to prevent issues
         if self.grid[col][row] == EMPTY_DEF:
             return True
         return False
 
     def is_in_bounds(self, col, row):
-        if (0 <= col <= self.cols) and (0<= row <= self.rows):
+        if (0 <= col < self.cols) and (0<= row < self.rows):
             return True
         else:
             return False
