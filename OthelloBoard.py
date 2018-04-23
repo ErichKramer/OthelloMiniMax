@@ -4,6 +4,7 @@
     If using this code please cite creator.
 
 '''
+#this imports the "Direction" Enum and Board object
 from Board import * 
 
 
