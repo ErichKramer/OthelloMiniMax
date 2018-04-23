@@ -10,10 +10,7 @@ import copy
 #The following has been excluded as no application is apparent
 
 from enum import Enum
-#"Directsion enum for the Othello Board"
-# a = Direction.S; 
-# a.name == 'NE' 
-#>true
+#"Directions enum for the Othello Board"
 
 class Direction(Enum):
     N   = 1
@@ -26,7 +23,7 @@ class Direction(Enum):
     NW  = 8
 
 #global empty state
-EMPTY = '.'
+EMPTY_DEF = '.'
 
 
 class Board:
@@ -34,7 +31,7 @@ class Board:
         self.cols = cols
         self.rows = rows
         #Col x Row grid filled with "EMPTY"
-        self.grid = [[EMPTY for x in range(cols)] for y in range(rows)]
+        self.grid = [[EMPTY_DEF for x in range(cols)] for y in range(rows)]
 
 
     #PYTHON    #Duplicate a board with B2 = B1.cloneBoard()
@@ -75,7 +72,7 @@ class Board:
 
 
     def is_cell_empty(self, col, row):
-        if self.grid[col][row] == EMPTY:
+        if self.grid[col][row] == EMPTY_DEF:
             return True
         return False
 
@@ -85,16 +82,18 @@ class Board:
         else:
             return False
 
-
+#some hacks to make the display look like in the CPP code
     def display(self):
-        string2 = '--' * self.cols
+        string2 = ' |'+('--' * self.cols)
         print(string2)
         for r in range (0,self.rows):
-            string = ''
+            string = str(self.rows - (r+1)) + '|'
             
             for c in range(0, self.cols):
                 string += self.grid[c][r] + ' '
             print(string)
+        
         print(string2)
+        print( '  ' + ''.join( str(x) + ' ' for x in range(self.cols) ) )
         
 

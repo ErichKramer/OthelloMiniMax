@@ -34,14 +34,14 @@ class GameDriver:
         self.board = OthelloBoard.OthelloBoard(num_rows, num_cols, self.p1.symbol, self.p2.symbol)
 
     def display(self):
-        print("Player 1 (", self.p1.symbol, ") score: ", \
-                self.board.count_score(self.p1.symbol), "\n")
+        print("Player 1 (", self.p1.symbol, ") score: ", self.board.count_score( self.p1.symbol ) )
+        print("Player 2 (", self.p2.symbol, ") score: ", self.board.count_score( self.p2.symbol ) )
 
     def process_move(self, curr_player, opponent):
         invalid_move = True
         while(invalid_move):
             (col, row) = curr_player.get_move(self.board)
-            if( not board.is_legal_move(col, row, curr_player.symbol)):
+            if( not self.board.is_legal_move(col, row, curr_player.symbol)):
                 print("Invalid move")
             else:
                 print("Move: Col=", col, " Row=", row)
@@ -50,10 +50,14 @@ class GameDriver:
 
 
     def run(self):
-        self.board.initialize();
-        self.board.display();
+        self.board.initialize()
         curr = self.p1
         opponent = self.p2
+        while(1):
+            self.board.display()
+            self.display()
+            self.process_move(curr, opponent)
+
 
         print("This is where the game code would go, IF I HAD ANY")
 

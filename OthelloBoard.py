@@ -6,7 +6,7 @@
 '''
 #this imports the "Direction" Enum and Board object
 from Board import * 
-
+import pdb
 
 
 class OthelloBoard(Board):
@@ -56,7 +56,7 @@ class OthelloBoard(Board):
 
 #Recursively travel in a direction
     def check_endpoint(self, col, row, symbol, d, match_symbol):#match is bool type
-        if not self.is_in_bounds(col, row) or is_cell_empty(col,row):
+        if not self.is_in_bounds(col, row) or self.is_cell_empty(col,row):
             return False
         else:
             if(match_symbol):
@@ -78,7 +78,7 @@ class OthelloBoard(Board):
             return False
         for d in Direction: #enum from board.py
             (next_col, next_row) = self.set_coords_in_direction(col, row, d)
-            if(self.check_endpoint(next_col, next_row, symbol, d, false)):
+            if(self.check_endpoint(next_col, next_row, symbol, d, False)):
                 return True
         return False
         
@@ -104,14 +104,14 @@ class OthelloBoard(Board):
 
         return pieces_flipped
 
-    def has_legal_moves_remaining(symbol):
+    def has_legal_moves_remaining(self, symbol):
         for c in range (0, self.cols):
             for r in range (0, self.rows):
                 if self.is_cell_empty(c, r) and self.is_legal_move(c, r, symbol):
                     return True
         return False;
 
-    def count_score(symbol):
+    def count_score(self, symbol):
         score = 0
         for c in range (0, self.cols):
             for r in range (0, self.rows):

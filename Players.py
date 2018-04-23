@@ -26,10 +26,10 @@ class HumanPlayer(Player):
         return HumanPlayer(self.symbol)
         
 #PYTHON: return tuple instead of change reference
-    def get_move():
+    def get_move(self, boardState):
         col = input("Enter col:")
         row = input("Enter row:")
-        return  (col, row)
+        return  ( int(col), int(row) )
 
 
 class MinimaxPlayer(Player):
@@ -42,7 +42,7 @@ class MinimaxPlayer(Player):
         return MinimaxPlayer(self.symbol);
 
 
-    def get_move():
+    def get_move(self, boardState):
         #This implementation has been excluded
         return None
 
