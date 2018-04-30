@@ -9,11 +9,12 @@ class Player:
     def __init__(self, symbol):
         self.symbol = symbol
 
-    def get_symbol():
+    #PYTHON: use obj.symbol instead
+    def get_symbol(self):
         return self.symbol
     
     #parent get_move should not be called
-    def get_move():
+    def get_move(self, board):
         raise NotImplementedError()
 
 
@@ -22,27 +23,28 @@ class HumanPlayer(Player):
     def __init__(self, symbol):
         Player.__init__(self, symbol);
 
-    def clone():
+    def clone(self):
         return HumanPlayer(self.symbol)
         
-#PYTHON: return tuple instead of change reference
-    def get_move(self, boardState):
-        col = input("Enter col:")
-        row = input("Enter row:")
-        return  ( int(col), int(row) )
+#PYTHON: return tuple instead of change reference as in C++
+    def get_move(self, board):
+        row = int(input("Enter row:"))
+        col = int(input("Enter col:"))
+        return  (col, row)
 
 
 class MinimaxPlayer(Player):
 
     def __init__(self, symbol):
         Player.__init__(self, symbol);
+        if symbol == 'X':
+            self.oppSym = 'O'
+        else:
+            self.oppSym = 'X'
+       
+        
 
 
-    def clone():
-        return MinimaxPlayer(self.symbol);
 
 
-    def get_move(self, boardState):
-        #This implementation has been excluded
-        return None
 

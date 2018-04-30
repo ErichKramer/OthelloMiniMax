@@ -4,9 +4,8 @@
     If using this code please cite creator.
 
 '''
-#this imports the "Direction" Enum and Board object
 from Board import * 
-import pdb
+
 
 
 class OthelloBoard(Board):
@@ -82,7 +81,7 @@ class OthelloBoard(Board):
                 return True
         return False
         
-    def flip_pieces_helper(col, row, symbol, d):
+    def flip_pieces_helper(self, col, row, symbol, d):
         if(self.get_cell(col, row) == symbol):
             return 0;
         else:
@@ -92,14 +91,14 @@ class OthelloBoard(Board):
 
 
 
-    def flip_pieces(col, row, symbol):
+    def flip_pieces(self, col, row, symbol):
         pieces_flipped = 0
         if(not self.is_in_bounds(col, row)):
             print("Flip Pieces bad params.")
             exit();
         for d in Direction:
             (next_col, next_row) = self.set_coords_in_direction(col,row,d)
-            if(self.check_endpoint(next_col, next_row, symbol, d, false)):
+            if(self.check_endpoint(next_col, next_row, symbol, d, False)):
                 pieces_flipped += self.flip_pieces_helper(next_col, next_row, symbol, d);
 
         return pieces_flipped
@@ -119,7 +118,7 @@ class OthelloBoard(Board):
                     score+=1
         return score
 
-    def play_move(col, row, symbol):
+    def play_move(self, col, row, symbol):
         self.set_cell(col, row, symbol)
         self.flip_pieces(col, row, symbol)
 
